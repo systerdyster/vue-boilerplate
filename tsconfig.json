@@ -3,10 +3,12 @@
     "compilerOptions": {
         "target": "es5",
         "strict": true,
-        "module": "commonjs",
+        "module": "esnext",
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "strictPropertyInitialization": false,
+        "noImplicitAny": true,
+        "allowUnreachableCode": false,
         "typeRoots": [
             "node_modules/@types/"
         ],
@@ -17,6 +19,10 @@
             "es6"
         ],
         "baseUrl": "./src",
+        "paths": {
+            "_models/*": [ "script/models/*" ],
+            "_components/*": [ "script/components/*" ]
+        }
     },
     "include": [
         "./src"

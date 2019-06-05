@@ -12,7 +12,7 @@ module.exports = (env = {}, argv = {}) => {
     var config = {
 
         entry: {
-            app: path.join(__dirname, "src/script", "app.ts")
+            app: path.join(__dirname, "src/script", "index.ts")
         },
 
         output: {
@@ -50,7 +50,18 @@ module.exports = (env = {}, argv = {}) => {
                     include: [
                         path.join(__dirname, "src")
                     ]
-                },  
+                }, 
+                {
+                    test: /.(pug|jade)$/,
+                    use: ['html-loader',
+                        {
+                            loader: 'pug-html-loader',
+                            query: {}  
+                        }],
+                    include: [
+                        path.join(__dirname, "src")
+                    ]
+                },
                 {
                     test: /\.(sass|scss)$/,
                     use: [
@@ -93,7 +104,13 @@ module.exports = (env = {}, argv = {}) => {
 
         resolve: {
             extensions: [".ts", ".js", ".sass", ".scss"],
-            modules: [ path.resolve(__dirname, 'src'), "node_modules" ]
+            modules: [ path.resolve(__dirname, 'src'), "node_modules" ],
+            alias: {
+                'vue$': 'vue/dist/vue.min.js',
+
+                _models: path.resolve(__dirname, 'src/script/models'),
+                _components: path.resolve(__dirname, 'src/script/components')
+            }
         }
     };
     return config;
